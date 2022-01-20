@@ -25,17 +25,23 @@ export const WindowEventListener = (props: Props) => {
   //   return 0;
   // });
 
-  const [countReducer, setCountReducer] = useReducer((prev: number) => {
-    console.log("reduced!");
-    return prev + 1;
-  }, 0);
+  // const [countReducer, setCountReducer] = useReducer((prev: number) => {
+  //   console.log("reduced!");
+  //   return prev + 1;
+  // }, 0);
+  const [countObjectFunc, setCountObjectFunc] = useState<{
+    setFunc: () => number;
+  }>({
+    setFunc: () => 0,
+  });
 
   const mouseDownEvent = () => {
     // console.log(`mouse Down!! count: ${count}`);
     // console.log(`mouse Down!! countVar(): ${countVar()}`);
     // console.log(`mouse Down!! countRef: ${countRef.current}`);
     // console.log(`mouse Down!! countFunc: ${countFunc}`);
-    console.log(`mouse Down!! countReducer: ${countReducer}`);
+    // console.log(`mouse Down!! countReducer: ${countReducer}`);
+    console.log(`mouse Down!! countObjectFunc: ${countObjectFunc.setFunc()}`);
 
     // setCount(count + 1);
     // setCount((prev) => prev + 1);
@@ -45,7 +51,12 @@ export const WindowEventListener = (props: Props) => {
     // setCountFunc(() => {
     //   return 1;
     // });
-    setCountReducer(countReducer + 1);
+    // setCountReducer(countReducer + 1);
+    setCountObjectFunc({
+      setFunc: () => {
+        return countObjectFunc.setFunc() + 1;
+      },
+    });
   };
 
   // const mouseDownEventWithUseCallback = useCallback(() => {
@@ -57,7 +68,8 @@ export const WindowEventListener = (props: Props) => {
   // console.log(`countVar: ${myCount}`);
   // console.log(`countRef: ${countRef.current}`);
   // console.log(`countFunc: ${countFunc}`);
-  console.log(`countReducer: ${countReducer}`);
+  // console.log(`countReducer: ${countReducer}`);
+  console.log(`countObjectFunc: ${countObjectFunc.setFunc()}`);
 
   // useEffect(() => {
   //   countRef.current += 1;
